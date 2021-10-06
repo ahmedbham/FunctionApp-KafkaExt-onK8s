@@ -1,8 +1,0 @@
-/workspaces/dapr-kubernetes/avro-producer/src/main/java/com/example/avro/model/AvroHttpRequest.java
-/workspaces/dapr-kubernetes/avro-producer/src/main/java/com/example/avro/model/ClientIdentifier.java
-/workspaces/dapr-kubernetes/avro-producer/src/main/java/com/example/avro/App.java
-/workspaces/dapr-kubernetes/avro-producer/src/main/java/com/example/avro/model/Active.java
-/workspaces/dapr-kubernetes/avro-producer/src/main/java/com/example/avro/util/serialization/AvroSerealizer.java
-/workspaces/dapr-kubernetes/avro-producer/src/main/java/com/example/avro/util/AvroSchemaBuilder.java
-/workspaces/dapr-kubernetes/avro-producer/src/main/java/com/example/avro/util/serialization/AvroDeSerealizer.java
-/workspaces/dapr-kubernetes/avro-producer/src/main/java/com/example/avro/util/AvroClassGenerator.java
