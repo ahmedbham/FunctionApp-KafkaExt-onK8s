@@ -38,6 +38,21 @@ make check
 
 Run `make create` to delete the existing cluster and create a new cluster
 
+## Exploring scaling of Azure function deployed on kubernetes with KEDA
+
+- Run `k get pods -n kafka` to see that a single instance of "kafka-trigger-function" is running
+- Run `k apply -f deploy/keda-kafka-scaledobject.yaml` to deploy the KEDA scaledobject
+- Run `kubectl exec --tty -i dapr-kafka-client --namespace kafka -- bash` to exec into kafka client
+- Run `kafka-topics.sh --create --topic users --bootstrap-server dapr-kafka.kafka:9092 --partitions 10 --replication-factor 1` 
+- If the topic `users` already exist, then run `kafka-topics.sh --alter --topic users --bootstrap-server dapr-kafka.kafka:9092 --partitions 10`
+
+- Run `kafka-console-producer.sh --broker-list dapr-kafka.kafka:9092 --topic users` to generate messages
+
+- open a new terminal, and run `k get pods -n kafka`. Keda would have scaled the azure function to zero
+- Now, in the first termina, quickly type 'n' and press "Enter" repeatedly in quick succession, 20 times
+- in the secong terminal run `k get pods -n kafka`. Keda would have scaled the azure function several instances
+- after about a minute, run `k get pods -n kafka` again. Keda would have scaled the azure function back to zero
+
 ### Engineering Docs
 
 - Team Working [Agreement](.github/WorkingAgreement.md)
