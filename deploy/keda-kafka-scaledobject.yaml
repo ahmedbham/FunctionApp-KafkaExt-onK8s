@@ -2,17 +2,18 @@ apiVersion: keda.sh/v1alpha1
 kind: ScaledObject
 metadata:
   name: kafka-scaledobject
-  namespace: default
+  namespace: kafka
 spec:
   scaleTargetRef:
-    name: kafka-function
-  pollingInterval: 10
+    name: kafka-trigger-function
+  pollingInterval: 1
   triggers:
   - type: kafka
     metadata:
       bootstrapServers: dapr-kafka.kafka:9092
-      consumerGroup: group1       # Make sure that this consumer group name is the same one as the one that is consuming topics
-      topic: new-topic
+      consumerGroup: functions       # Make sure that this consumer group name is the same one as the one that is consuming topics
+      topic: users
       # Optional
       lagThreshold: "1"
-      offsetResetPolicy: latest
+      offsetResetPolicy: earliest
+      allowIdleConsumers: "true"

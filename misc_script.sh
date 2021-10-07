@@ -49,3 +49,14 @@ docker run -d  --name docker-client docker.io/bitnami/kafka:2.8.0-debian-10-r84 
 docker  container exec -it docker-client bash
 
 {"requestTime": 100, "clientIdentifier": {"hostName": "host1", "ipAddress": "10.0.0.1"}, "employeeNames": ["amp1", "emp2"], "active": "YES"}
+
+k get pods -n kafka
+
+k apply -f deploy/keda-kafka-scaledobject.yaml
+
+ kubectl exec --tty -i dapr-kafka-client --namespace kafka -- bash
+
+kafka-topics.sh --create --topic users --bootstrap-server dapr-kafka.kafka:9092 --partitions 10 --replication-factor 1
+kafka-topics.sh --alter --topic users --bootstrap-server dapr-kafka.kafka:9092 --partitions 10
+
+ kafka-console-producer.sh --broker-list dapr-kafka.kafka:9092 --topic users
