@@ -1,0 +1,12 @@
+{
+  "scriptFile" : "../kafka-function-1.0-SNAPSHOT.jar",
+  "entryPoint" : "com.contoso.kafka.TriggerFunction.runOne",
+  "bindings" : [ {
+    "type" : "kafkaTrigger",
+    "direction" : "in",
+    "name" : "kafkaTrigger",
+    "topic" : "users",
+    "consumerGroup" : "functions",
+    "brokerList" : "broker:29092"
+  } ]
+}

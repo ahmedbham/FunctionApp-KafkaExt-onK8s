@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: kafka-trigger-function
+  name: kafka-trigger-function 
+  namespace: kafka
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kafka-trigger-function
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: kafka-trigger-function
+    spec:
+      containers:
+      - image: k3d-registry.localhost:5000/kafka-trigger-function:latest
+        name: kafka-trigger-function
+        
+status: {}
