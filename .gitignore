@@ -5,6 +5,12 @@
 
 dotFiles/.**
 
+# Build output
+target/
+*.class
+*.jar
+
+
 # User-specific files
 *.suo
 *.user
@@ -302,3 +308,7 @@ dist
 ### OSX ###
 # General
 .DS_Store
+kafka-trigger-function/target/azure-functions/kafka-function-20190419163130420/kafka-function-1.0-SNAPSHOT.jar
+kafka-trigger-function/target/classes/com/contoso/kafka/TriggerFunction.class
+kafka-trigger-function/target/kafka-function-1.0-SNAPSHOT.jar
+.gitignore

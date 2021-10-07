@@ -2,6 +2,9 @@
 
 echo "on-create start" >> ~/status
 
+# # create a network
+docker network create dapr
+
 # # create local registry
 k3d registry create registry.localhost --port 5000
 docker network connect dapr k3d-registry.localhost

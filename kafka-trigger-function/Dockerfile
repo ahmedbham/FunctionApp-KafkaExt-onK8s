@@ -1,11 +1,12 @@
-FROM mcr.microsoft.com/azure-functions/java:3.0-java8-core-tools AS installer-env
+ARG JAVA_VERSION=11
+FROM mcr.microsoft.com/azure-functions/java:3.0-java${JAVA_VERSION}-core-tools AS installer-env
 
 COPY . /src/java-function-app
 RUN cd /src/java-function-app && \
     mkdir -p /home/site/wwwroot && \
-    func extensions install --package Microsoft.Azure.WebJobs.Extensions.Kafka --version 2.0.0-beta --java && \
-    cp -r bin /home/site/wwwroot && \
-    mvn clean package && \
+    # func extensions install --package Microsoft.Azure.WebJobs.Extensions.Kafka --version 2.0.0-beta --java && \
+    # cp -r bin /home/site/wwwroot && \
+    # mvn clean package && \
     cd ./target/azure-functions/ && \
     cd $(ls -d */|head -n 1) && \
     cp ../../../extensions.csproj . && \
@@ -17,10 +18,10 @@ RUN cd /src/java-function-app && \
 # and are not intended to be used for any other purpose.
 
 # This image is ssh enabled
-FROM mcr.microsoft.com/azure-functions/java:3.0-java8-appservice
+# FROM mcr.microsoft.com/azure-functions/java:3.0-java${JAVA_VERSION}-appservice
 
 # If you want to deploy outside of Azure, use this image
-#FROM mcr.microsoft.com/azure-functions/java:3.0-java8
+FROM mcr.microsoft.com/azure-functions/java:3.0-java${JAVA_VERSION}
 
 ENV AzureWebJobsScriptRoot=/home/site/wwwroot \
     AzureFunctionsJobHost__Logging__Console__IsEnabled=true
